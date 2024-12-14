@@ -1,0 +1,49 @@
+display_attendance_percentage(self):
+        if not self.employees:
+            print("No employees found.")
+            return
+        for employee in self.employees:
+            percentage = employee.calculate_attendance_percentage()
+            print(f"{employee.name} - Attendance Percentage: {percentage:.2f}%")
+
+
+def main():
+    tracker = AttendanceTracker()
+
+    while True:
+        print("\nEmployee Attendance Tracker")
+        print("1. Add Employee")
+        print("2. Mark Attendance")
+        print("3. View All Attendance Records")
+        print("4. Display Attendance Percentage")
+        print("5. Exit")
+
+        choice = input("Select an option (1-5): ")
+
+        if choice == '1':
+            employee_id = input("Enter Employee ID: ")
+            name = input("Enter Employee Name: ")
+            organization = input("Enter Organization Name: ")
+            tracker.add_employee(employee_id, name, organization)
+
+        elif choice == '2':
+            employee_id = input("Enter Employee ID: ")
+            present = input("Is the employee present? (yes/no): ").strip().lower() == 'yes'
+            tracker.mark_attendance(employee_id, present)
+
+        elif choice == '3':
+            tracker.display_all_attendance_records()
+
+        elif choice == '4':
+            tracker.display_attendance_percentage()
+
+        elif choice == '5':
+            print("Exiting the program.")
+            break
+
+        else:
+            print("Invalid option. Please try again.")
+
+
+if __name__ == "__main__":
+    main()
